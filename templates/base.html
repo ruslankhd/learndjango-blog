@@ -1,15 +1,20 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <title>Blog</title>
 </head>
+
 <body>
     <header>
         <h1><a href="{% url 'home' %}">Blog</a></h1>
+        {% if user.is_authenticated %} <p>Hey, {{user.first_name }}!
+            <a href="{% url 'logout' %}">Log Out</a>
+        </p>{% else %} <a href="{% url 'login' %}">Log In</a>{% endif %}
         <div><a href="{% url 'post_new' %}">New Post</a></div>
     </header>
     <div>
@@ -17,4 +22,5 @@
         {% endblock content %}
     </div>
 </body>
+
 </html>
